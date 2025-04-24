@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xynix | ShadowCodeMaker</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Space+Mono:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Space Mono', monospace;
+            background-color: #0a0a0a;
+            color: #e0e0e0;
+            scroll-behavior: smooth;
+        }
+        
+        .code-font {
+            font-family: 'Share Tech Mono', monospace;
+        }
+        
+        .glow-text {
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.7);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #00ffff, #00ffaa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .terminal {
+            background: rgba(10, 10, 20, 0.8);
+            border: 1px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+        }
+        
+        .terminal-header {
+            background: linear-gradient(90deg, #002222, #001111);
+            border-bottom: 1px solid #00ffff;
+        }
+        
+        .terminal-body {
+            background: rgba(0, 20, 20, 0.5);
+        }
+        
+        .btn-hacker {
+            background: linear-gradient(90deg, #003333, #001111);
+            border: 1px solid #00ffff;
+            transition: all 0.3s;
+        }
+        
+        .btn-hacker:hover {
+            background: linear-gradient(90deg, #006666, #003333);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+        
+        .typewriter {
+            overflow: hidden;
+            border-right: .15em solid #00ffff;
+            white-space: nowrap;
+            animation: 
+                typing 3.5s steps(40, end),
+                blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: #00ffff; }
+        }
+        
+        .skill-bar {
+            background: #002222;
+        }
+        
+        .skill-progress {
+            background: linear-gradient(90deg, #00ffff, #00ffaa);
+            height: 100%;
+            transition: width 1s ease-in-out;
+        }
+        
+        .social-icon {
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px);
+            filter: drop-shadow(0 0 8px rgba(0, 255, 255, 0.7));
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Cursor Trailer -->
+    <div id="cursor-trailer" class="fixed w-8 h-8 rounded-full pointer-events-none mix-blend-difference bg-cyan-400 opacity-70 z-50 transform -translate-x-1/2 -translate-y-1/2"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-80 backdrop-blur-sm z-40 border-b border-cyan-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-cyan-400 font-bold text-xl code-font">Xynix</span>
+                    </div>
+                </div>
+                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Home</a>
+                    <a href="#about" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">About</a>
+                    <a href="#skills" class="text-gray-300
+hove
+er:text-
+cya
+-cy
+t-cya
+n-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Skills</a>
+                    <a href="#projects" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Projects</a>
+                    <a href="#contact" class="text-gray-300 hover:text-cyan-400 px-3 py-2 rounded-md text-sm font-medium transition duration-300">Contact</a>
+                </div>
+                <div class="-mr-2 flex items-center md:hidden">
+                    <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-95 border-t border-cyan-900">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Projects</a>
+                <a href="#contact" class="text-gray-300 hover:text-cyan-400 block px-3 py-2 rounded-md text-base font-medium transition duration-300">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto min-h-screen flex items-center">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="text-center md:text-left">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                    <span class="gradient-text">Hello, I'm</span>
+                    <span class="block text-5xl md:text-7xl glow-text mt-2">Xynix</span>
+                </h1>
+                <div class="typewriter text-xl md:text-2xl text-cyan-400 code-font mb-6 mx-auto md:mx-0 w-fit">
+                    ShadowCodeMaker | ZeroSpector
+                </div>
+                <p class="text-gray-400 mb-8 max-w-lg">
+                    Cybersecurity specialist, ethical hacker, and full-stack developer. 
+                    I specialize in penetration testing, phishing simulations, and secure web development.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#contact" class="btn-hacker text-white px-6 py-3 rounded-md font-medium code-font flex items-center justify-center gap-2">
+                        <i class="fas fa-terminal"></i> Contact Me
+                    </a>
+                    <a href="#projects" class="bg-transparent border border-cyan-400 text-cyan-400 px-6 py-3 rounded-md font-medium code-font flex items-center justify-center gap-2 hover:bg-cyan-900 hover:bg-opacity-30 transition duration-300">
+                        <i class="fas fa-laptop-code"></i> My Work
+                    </a>
+                </div>
+            </div>
+            <div class="relative">
+                <div class="terminal rounded-lg overflow-hidden w-full max-w-md mx-auto">
+                    <div class="terminal-header px-4 py-2 flex items-center">
+                        <div class="flex space-x-2">
+                            <div class="w-3 h-3 rounded-f
+ull bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                        </div>
+                        <div class="text-center flex-grow text-xs text-cyan-300 code-font">
+                            xynix@shadow:~/
+                        </div>
+                    </div>
+                    <div class="terminal-body p-4 h-64 overflow-y-auto code-font text-sm">
+                        <p class="text-green-400">xynix@shadow:~$ whoami</p>
+                        <p class="text-cyan-300 mb-2">Xynix | ShadowCodeMaker | ZeroSpector</p>
+                        
+                        <p class="text-green-400">xynix@shadow:~$ cat about.txt</p>
+                        <p class="text-gray-300 mb-2">
+                            Cybersecurity Specialist<br>
+                            Ethical Hacker<br>
+                            Full-Stack Developer<br>
+                            Phishing Simulation Expert<br>
+                            Security Researcher
+                        </p>
+                        
+                        <p class="text-green-400">xynix@shadow:~$ locate skills</p>
+                        <p class="text-gray-300 mb-2">
+                            Penetration Testing | Web Exploitation<br>
+                            Social Engineering | Network Security<br>
+                            JavaScript | Python | PHP | SQL<br>
+                            Web Development | Reverse Engineering
+                        </p>
+                        
+                        <p class="text-green-400">xynix@shadow:~$ <span class="cursor-blink">_</span></p>
+                    </div>
+                </div>
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 border-2 border-cyan-400 opacity-30"></div>
+                <div class="absolute -top-6 -left-6 w-24 h-24 border-2 border-cyan-400 opacity-30"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-black bg-opacity-50 border-y border-cyan-900">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">About</span> <span class="text-white">Me</span>
+            </h2>
+            <div class="w-20 h-1 bg-cyan-400 mx-auto mb-6"></div>
+            <p class="text-gray-400 max-w-3xl mx-auto">
+                Who is behind the alias Xynix? Let me reveal the person behind the code.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div class="relative">
+                <div class="w-full h-80 md:h-96 bg-gray-900 rounded-lg overflow-hidden relative border border-cyan-900">
+                    <div class="absolute inset-0 bg-gradient-to-r from-cyan-900 to-transparent opacity-20"></div>
+                    <div class="absolute inset-0 flex items-center justify-center">
+                        <div class="text-center p-8">
+                            <div class="w-32 h-32 rounded-full border-4 border-cyan-400 mx-auto mb-4 overflow-hidden">
+                                <div class="w-full h-full bg-gray-800 flex items-center justify-center">
+                                    <i class="fas fa-user-secret text-6xl text-cyan-400"></i>
+                                </div>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white mb-2">Xynix</h3>
+                            <p class="text-cyan-400 code-font">ShadowCodeMaker</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="absolute -bottom-4 -right-4 w-24 h-24 border-2 border-cyan-400 opacity-30"></div>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-6">Cybersecurity Specialist & Ethical Hacker</h3>
+                <p class="text-gray-400 mb-6">
+I am a passionate cybersecurity professional with extensive experience in ethical hacking, 
+                    penetration testing, and security research. My journey in the digital shadows has equipped 
+                    me with unique insights into system vulnerabilities and defense mechanisms.
+                </p>
+                <p class="text-gray-400 mb-6">
+                    As the founder of ZeroSpector on Telegram, I've built a community focused on cybersecurity 
+                    awareness and ethical hacking practices. My alias Xynix represents my commitment to 
+                    exploring the boundaries of digital security while maintaining ethical standards.
+                </p>
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-cyan-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-shield-alt text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium">Security First</h4>
+                            <p class="text-gray-400 text-sm">Always prioritizing security</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-cyan-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-code text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium">Clean Code</h4>
+                            <p class="text-gray-400 text-sm">Efficient and secure coding</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-cyan-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-bug text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium">Bug Hunter</h4>
+                            <p class="text-gray-400 text-sm">Finding vulnerabilities</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 rounded-full bg-cyan-900 flex items-center justify-center mr-3">
+                            <i class="fas fa-users text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium">Community</h4>
+                            <p class="text-gray-400 text-sm">Building security awareness</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#contact" class="btn-hacker text-white px-6 py-3 rounded-md font-medium code-font inline-flex items-center gap-2">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">My</span> <span class="text-white">Skills</span>
+            </h2>
+            <div class="w-20 h-1 bg-cyan-400 mx-auto mb-6"></div>
+            <p class="text-gray-400 max-w-3xl mx-auto">
+                A combination of offensive security skills and defensive programming expertise.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-user-secret mr-3 text-cyan-400"></i> Cybersecurity Skills
+                </h3>
+                <div class="space-y-6">
+<div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">Penetration Testing</span>
+                            <span class="text-cyan-400">95%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress rounded-full" style="width: 95%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">Phishing Simulations</span>
+                            <span class="text-cyan-400">90%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">Network Security</span>
+                            <span class="text-cyan-400">85%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">Social Engineering</span>
+                            <span class="text-cyan-400">88%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress rounded-full" style="width: 88%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold text-white mb-6 flex items-center">
+                    <i class="fas fa-code mr-3 text-cyan-400"></i> Development Skills
+                </h3>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">JavaScript</span>
+                            <span class="text-cyan-400">90%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress rounded-full" style="width: 90%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">PHP</span>
+                            <span class="text-cyan-400">85%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">Python</span>
+                            <span class="text-cyan-400">80%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress rounded-full" style="width: 80%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-2">
+                            <span class="text-gray-300">SQL</span>
+                            <span class="text-cyan-400">75%</span>
+                        </div>
+                        <div class="skill-bar w-full h-2 rounded-full">
+                            <div class="skill-progress
+ress
+rounded-full" style="width: 75%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-16">
+            <h3 class="text-xl font-bold text-white mb-6 text-center">
+                <i class="fas fa-tools mr-3 text-cyan-400"></i> Tools & Technologies
+            </h3>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-gray-900 bg-opacity-50 border border-cyan-900 rounded-lg px-6 py-3 flex items-center">
+                    <i class="fab fa-linux text-2xl text-cyan-400 mr-3"></i>
+                    <span class="text-gray-300">Kali Linux</span>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 border border-cyan-900 rounded-lg px-6 py-3 flex items-center">
+                    <i class="fas fa-terminal text-2xl text-cyan-400 mr-3"></i>
+                    <span class="text-gray-300">Metasploit</span>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 border border-cyan-900 rounded-lg px-6 py-3 flex items-center">
+                    <i class="fas fa-network-wired text-2xl text-cyan-400 mr-3"></i>
+                    <span class="text-gray-300">Burp Suite</span>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 border border-cyan-900 rounded-lg px-6 py-3 flex items-center">
+                    <i class="fab fa-js text-2xl text-cyan-400 mr-3"></i>
+                    <span class="text-gray-300">Node.js</span>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 border border-cyan-900 rounded-lg px-6 py-3 flex items-center">
+                    <i class="fab fa-git-alt text-2xl text-cyan-400 mr-3"></i>
+                    <span class="text-gray-300">Git</span>
+                </div>
+                <div class="bg-gray-900 bg-opacity-50 border border-cyan-900 rounded-lg px-6 py-3 flex items-center">
+                    <i class="fas fa-database text-2xl text-cyan-400 mr-3"></i>
+                    <span class="text-gray-300">SQL</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-black bg-opacity-50 border-y border-cyan-900">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">My</span> <span class="text-white">Projects</span>
+            </h2>
+            <div class="w-20 h-1 bg-cyan-400 mx-auto mb-6"></div>
+            <p class="text-gray-400 max-w-3xl mx-auto">
+                A selection of my cybersecurity and development projects.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Project 1 -->
+            <div class="terminal rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div class="terminal-header px-4 py-2">
+                    <div class="text-xs text-cyan-300 code-font">zero-spector</div>
+                </div>
+                <div class="terminal-body p-0">
+                    <div class="h-48 bg-gradient-to-br from-cyan-900 to-black flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-6xl text-cyan-400 opacity-70"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">ZeroSpector</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Cybersecurity community on Telegram focused on ethical hacking and security awareness.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">Community</span>
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">Security</span>
+<span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">Education</span>
+                        </div>
+                        <a href="#" class="text-cyan-400 text-sm code-font flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i> Visit Channel
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 2 -->
+            <div class="terminal rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div class="terminal-header px-4 py-2">
+                    <div class="text-xs text-cyan-300 code-font">phish-sim</div>
+                </div>
+                <div class="terminal-body p-0">
+                    <div class="h-48 bg-gradient-to-br from-cyan-900 to-black flex items-center justify-center">
+                        <i class="fas fa-fish text-6xl text-cyan-400 opacity-70"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Phishing Simulation Toolkit</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Custom framework for conducting ethical phishing simulations and security training.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">Security</span>
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">PHP</span>
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">JavaScript</span>
+                        </div>
+                        <a href="#" class="text-cyan-400 text-sm code-font flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Project 3 -->
+            <div class="terminal rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+                <div class="terminal-header px-4 py-2">
+                    <div class="text-xs text-cyan-300 code-font">web-vuln</div>
+                </div>
+                <div class="terminal-body p-0">
+                    <div class="h-48 bg-gradient-to-br from-cyan-900 to-black flex items-center justify-center">
+                        <i class="fas fa-bug text-6xl text-cyan-400 opacity-70"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold text-white mb-2">Web Vulnerability Scanner</h3>
+                        <p class="text-gray-400 text-sm mb-4">
+                            Automated tool for detecting common web vulnerabilities in applications.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">Python</span>
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">Security</span>
+                            <span class="text-xs px-2 py-1 bg-cyan-900 bg-opacity-30 text-cyan-400 rounded">Automation</span>
+                        </div>
+                        <a href="#" class="text-cyan-400 text-sm code-font flex items-center">
+                            <i class="fas fa-external-link-alt mr-2"></i> View Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-16">
+            <a href="#" class="btn-hacker text-white px-6 py-3 rounded-md font-medium code-font inline-flex items-center gap-2">
+                <i class="fas fa-archive"></i> View All Projects
+            </a>
+        </div>
+    </section>
+
+    <!--
+<!--
+Contact Section -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4">
+                <span class="gradient-text">Get In</span> <span class="text-white">Touch</span>
+            </h2>
+            <div class="w-20 h-1 bg-cyan-400 mx-auto mb-6"></div>
+            <p class="text-gray-400 max-w-3xl mx-auto">
+                Interested in cybersecurity services or collaboration? Reach out through any of these channels.
+            </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div>
+                <h3 class="text-2xl font-bold text-white mb-6">Contact Information</h3>
+                <p class="text-gray-400 mb-8">
+                    For professional inquiries, security consultations, or collaboration opportunities, 
+                    please use the contact methods below. I typically respond within 24-48 hours.
+                </p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-cyan-900 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fas fa-envelope text-xl text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium mb-1">Email</h4>
+                            <a href="mailto:contact@xynix.io" class="text-cyan-400 code-font">contact@xynix.io</a>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-cyan-900 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fab fa-telegram text-xl text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium mb-1">Telegram</h4>
+                            <a href="https://t.me/ShadowCodeMaker" target="_blank" class="text-cyan-400 code-font">@ShadowCodeMaker</a>
+                            <p class="text-gray-400 text-sm mt-1">Primary communication channel</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start">
+                        <div class="w-12 h-12 rounded-full bg-cyan-900 flex items-center justify-center mr-4 flex-shrink-0">
+                            <i class="fab fa-telegram text-xl text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-medium mb-1">ZeroSpector Channel</h4>
+                            <a href="https://t.me/ZeroSpector" target="_blank" class="text-cyan-400 code-font">@ZeroSpector</a>
+                            <p class="text-gray-400 text-sm mt-1">My cybersecurity community</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-12">
+                    <h4 class="text-white font-medium mb-4">Follow Me</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-cyan-900 flex items-center justify-center text-cyan-400 hover:bg-cyan-800">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-cyan-900 flex items-center justify-center text-cyan-400 hover:bg-cyan-800">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 rounded-full bg-cyan-900 flex items-center justify-center text-cyan-400 hover:bg-cyan-800">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                        <a href="#" class="social-icon w-10 h-10 round
+ed-full bg-cyan-900 flex items-center justify-center text-cyan-400 hover:bg-cyan-800">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="terminal rounded-lg overflow-hidden">
+                    <div class="terminal-header px-4 py-2">
+                        <div class="text-xs text-cyan-300 code-font">contact-form</div>
+                    </div>
+                    <div class="terminal-body p-6">
+                        <form id="contactForm">
+                            <div class="mb-6">
+                                <label for="name" class="block text-gray-300 text-sm mb-2 code-font">Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-2 bg-gray-900 border border-cyan-900 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Your name">
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-gray-300 text-sm mb-2 code-font">Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-2 bg-gray-900 border border-cyan-900 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="your@email.com">
+                            </div>
+                            <div class="mb-6">
+                                <label for="subject" class="block text-gray-300 text-sm mb-2 code-font">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-2 bg-gray-900 border border-cyan-900 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Subject">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-300 text-sm mb-2 code-font">Message</label>
+                                <textarea id="message" rows="4" class="w-full px-4 py-2 bg-gray-900 border border-cyan-900 rounded-md text-gray-300 focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:border-transparent" placeholder="Your message"></textarea>
+                            </div>
+                            <div class="flex justify-end">
+                                <button type="submit" class="btn-hacker text-white px-6 py-3 rounded-md font-medium code-font flex items-center gap-2">
+                                    <i class="fas fa-paper-plane"></i> Send Message
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-80 border-t border-cyan-900 py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <span class="text-cyan-400 font-bold text-xl code-font">Xynix</span>
+                    <p class="text-gray-500 text-sm mt-2">ShadowCodeMaker | ZeroSpector</p>
+                </div>
+                <div class="flex flex-col items-center md:items-end">
+                    <p class="text-gray-500 text-sm mb-4">
+                        "In the shadows of the digital world, security is not a product but a process."
+                    </p>
+                    <p class="text-gray-600 text-xs code-font">
+                        &copy; <span id="year"></span> Xynix. All rights reserved.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 rounded-full bg-cyan-900 border border-cyan-700 flex items-center
+justify-ce
+nter text-cyan-400 opacity-0 invisible transition-all duration-300 hover:bg-cyan-800 hover:text-white">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Set current year in footer
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Cursor trailer effect
+        const trailer = document.getElementById("cursor-trailer");
+        
+        const animateTrailer = (e, interacting) => {
+            const x = e.clientX - trailer.offsetWidth / 2,
+                  y = e.clientY - trailer.offsetHeight / 2;
+            
+            const keyframes = {
+   ent.getElementById('year').textContent = new Date().getFullYear();
+
+        // Back to top button
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+
+        backToTopButton.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Cursor trailer effect
+        const trailer = document.getElementById("cursor-trailer");
+        
+        const animateTrailer = (e, interacting) => {
+            const x = e.clientX - trailer.offsetWidth / 2,
+                  y = e.clientY - trailer.offsetHeight / 2;
+            
+            const keyframes = {
+                transform: translate(${x}px, ${y}px) scale(${interacting ? 2 : 1}),
+                opacity: interacting ? 0.5 : 0.7
+            }
+            
+            trailer.animate(keyframes, { 
+                duration: 800, 
+                fill: "forwards" 
+            });
+        }
+        
+        const getInteractable = (target) => {
+            return target.closest("a, button, .terminal, .btn-hacker, input, textarea");
+        }
+        
+        window.onmousemove = e => {
+            const interactable = getInteractable(e.target),
+                  interacting = interactable !== null;
+            
+            animateTrailer(e, interacting);
+        }
+
+        // Form submission
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            
+            // Here you would typically send the data to a server
+            console.log({name, email, subject, message});
+            
+            // Show success message
+            alert('Message sent successfully! I will get back to you soon.');
+            
+            // Reset form
+            this.reset();
+        });
+
+        // Terminal cursor blink effect
+        function blinkCursor() {
+            const cursor = document.querySelector('.cursor-blink');
+            if (cursor) {
+                setInterval(() => {
+                    cursor.style.visibility = (cursor.style.visibility === 'hidden' ? '' : 'hidden');
+                }, 500);
+            }
+        }
+        
+        // Initialize when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            blinkCursor();
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+behavior: 'smooth'
+                        });
+                        
+                        // Close mobile menu if open
+                        const mobileMenu = document.getElementById('mobile-menu');
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
