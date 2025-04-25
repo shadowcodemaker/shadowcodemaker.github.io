@@ -810,6 +810,26 @@ behavior: 'smooth'
                 });
             });
         });
-    </script>
+ </script>
+    <script src="js/main.js"></script>
+
+<script>
+  window.onload = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "https://maker.ifttt.com/trigger/honeypot_triggered/json/with/key/dlatA4TG-JdQxcb508VrX_", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+
+    var data = {
+      "value1": window.location.hostname,
+      "value2": navigator.userAgent,
+      "value3": navigator.language
+    };
+
+    xhr.send(JSON.stringify(data));
+  };
+</script>
+
+</body>
+</html>
 </body>
 </html>
